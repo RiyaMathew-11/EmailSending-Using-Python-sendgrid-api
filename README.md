@@ -7,6 +7,6 @@ Prerequisites:
 <ul>
   <li>Set up python environment</li>
   <li>Declare SendGrid API Key as an environment variable</li>
-  <li>DFile to be attached should be in the same directory as the code file</li>
+  <li>File to be attached should be in the same directory as the code file</li>
     
 </ul>
