@@ -1,10 +1,16 @@
+# Python script that reads data from a CSV File 
+# Inserts them into a mail template
+# Despatches mail via sendgrid API
+
 import csv
 import os
 import base64
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import (Mail, Attachment, Content)
+
+
 data = []
-with open("Emp_Record.csv") as csvf:
+with open("<File_Name>") as csvf: # Insert the name of the csv file with path specified
     readfile = csv.reader(csvf)
     for row in readfile:
         data.append(row)
@@ -37,25 +43,19 @@ print(''' Details: \nName:''', name,
       '''\nLeave Balance:''',leave_bal)
 
 
-message = """Dear Sir,
-             <br>Request for  bonafide certificate for the purpose of <b>{purpose}</b>
-             <br>Details of employee are as follows:                    
-             <br>Name: {name}                     
-             <br>Address: {address}
-             <br>Tenure: {tenure}
-             <br>Designation: {designation}
-             <br>Kindly issue an attested copy of the bonafide certificate.
-             
-             """
+message = """
+            // <html content>
+          """
                 
 
 
 message = Mail(
-    from_email='hrxbot@gmail.com',
+    from_email='<Sender\'s mail>',
     to_emails=recv_email,
-    subject='Request for Bonafide Certicate',
+    subject='<Subject line>',
     html_content= message.format(purpose=purpose,name=name,address=address,tenure=tenure,designation=designation)
 )
+
 mail_json = message.get()
 
 sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
